@@ -26,15 +26,15 @@ pipeline {
       stage('Build and Push Image') {
          steps {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
-         
+           sh 'docker login --username=${YOUR_DOCKERHUB_USERNAME} -p "${DOCKER_PASSWORD}"'
+           sh 'docker push ${REPOSITORY_TAG}'
          }
       }
 
       stage('Deploy to Cluster') {
           steps {
                     sh 'envsubst < ${WORKSPACE}/demo-communicate-deploy.yml | kubectl apply -f -'
-                    sh 'docker login --username=${YOUR_DOCKERHUB_USERNAME} -p "${DOCKER_PASSWORD}"'
-                    sh 'docker push ${REPOSITORY_TAG}'
+                   
           }
       }
    }
