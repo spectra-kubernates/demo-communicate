@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/communicate")
+@RequestMapping("/demo-communicate")
 public class CommunicationController {
 	
 	@Autowired
